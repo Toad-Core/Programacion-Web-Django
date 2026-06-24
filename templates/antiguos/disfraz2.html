@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Fredy Bohle, Juan Carlos Asenjo" />
+    <title>Disfraz 2 - Skeleton Shop</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-dark text-light">
+    <header>
+      <nav class="navbar sticky-top navbar-expand-lg navbar-custom bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html">Skeleton Shop</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="offcanvas offcanvas-end bg-dark"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                Skeleton Shop
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="../index.html"
+                    >Inicio</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../html/contacto.html">Contacto</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../html/disfraces.html"
+                    >Disfraces</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="content-wrapper product-page">
+      <div
+        class="product-breadcrumb mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3"
+      >
+        <a href="../html/disfraces.html" class="btn btn-sm btn-outline-warning"
+          >← Volver a disfraces</a
+        >
+        <div class="text-end">
+          <p class="small text-muted mb-1">Categoría: Bruja</p>
+          <p class="small text-muted mb-0">Stock: Disponible</p>
+        </div>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6 product-carousel">
+          <div
+            id="carouselProducto"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselProducto"
+                data-bs-slide-to="0"
+                class="active"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselProducto"
+                data-bs-slide-to="1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselProducto"
+                data-bs-slide-to="2"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="../img/disfraz2-1.png"
+                  class="d-block w-100 product-image"
+                  alt="Disfraz Bruja Mística - Vista frontal"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="../img/disfraz2-2.png"
+                  class="d-block w-100 product-image"
+                  alt="Disfraz Bruja Mística - Vista lateral"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="../img/disfraz2-3.png"
+                  class="d-block w-100 product-image"
+                  alt="Disfraz Bruja Mística - Detalle"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselProducto"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselProducto"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-6 product-info">
+          <h1 class="product-title mb-2">Bruja Mística</h1>
+          <div class="product-meta d-flex align-items-center gap-2 mb-3">
+            <span class="badge rounded-pill">Popular</span>
+            <span class="text-warning">★★★★★</span>
+            <small class="text-secondary">(37 reseñas)</small>
+          </div>
+          <p class="small text-secondary mb-3">
+            Entrega express 24-48 horas · Envío gratis sobre $30.000
+          </p>
+
+          <p class="product-price mb-1">$42.990</p>
+          <p class="precio-og mb-3">$55.990</p>
+
+          <p class="product-description">
+            Disfraz de bruja con vestido largo de tul negro y morado, sombrero
+            de punta con hebilla decorativa y cinturón con detalles plateados.
+            Ideal para Halloween, fiestas de disfraces y sesiones fotográficas
+            temáticas.
+          </p>
+
+          <hr class="section-divider" />
+
+          <div class="mb-4">
+            <label class="form-label fw-bold text-warning" for="talla"
+              >Talla</label
+            >
+            <select id="talla" class="form-select w-auto" name="talla">
+              <option value="S">S</option>
+              <option value="M" selected>M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-bold text-warning">Cantidad</label>
+            <div class="input-group input-quantity" style="max-width: 150px">
+              <button class="btn btn-outline-warning" type="button">−</button>
+              <input
+                type="number"
+                class="form-control text-center"
+                value="1"
+                min="1"
+              />
+              <button class="btn btn-outline-warning" type="button">+</button>
+            </div>
+          </div>
+
+          <div class="product-actions d-flex gap-3 flex-wrap">
+            <button class="btn btn-lg fw-bold btn-warning action-button">
+              🛒 Agregar al carrito
+            </button>
+            <button class="btn btn-outline-warning btn-lg">♡ Favoritos</button>
+          </div>
+
+          <hr class="section-divider mt-4" />
+
+          <ul class="list-unstyled product-features">
+            <li>✔ Envío gratis en compras sobre $30.000</li>
+            <li>✔ Devolución gratuita en 30 días</li>
+            <li>✔ Material: Tul, poliéster y encaje</li>
+            <li>✔ Disponible para envío inmediato</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="product-tabs mt-5">
+        <ul class="nav nav-tabs" id="productoTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active fw-bold"
+              id="desc-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#desc"
+              type="button"
+              role="tab"
+            >
+              Descripción
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link fw-bold"
+              id="resenas-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#resenas"
+              type="button"
+              role="tab"
+            >
+              Reseñas (37)
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content p-4">
+          <div class="tab-pane fade show active" id="desc" role="tabpanel">
+            <h5>Detalles del disfraz</h5>
+            <p>
+              El disfraz de Bruja Mística combina elegancia y misterio. El
+              vestido tiene capas de tul en tonos negro y morado oscuro, con
+              bordados de estrellas plateadas en el dobladillo. El sombrero de
+              punta clásico incluye una hebilla metálica envejecida.
+            </p>
+            <h6>Incluye:</h6>
+            <ul>
+              <li>Vestido largo de tul multicapa</li>
+              <li>Sombrero de punta con hebilla</li>
+              <li>Cinturón con detalles plateados</li>
+              <li>Guantes de encaje negro</li>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="resenas" role="tabpanel">
+            <div class="mb-3 pb-3 review-block">
+              <div class="d-flex justify-content-between">
+                <strong>Laura M.</strong>
+                <span>★★★★★</span>
+              </div>
+              <small class="text-muted">12 oct 2025</small>
+              <p class="mt-1 mb-0">
+                Hermoso disfraz, el tul tiene un caído precioso. Los guantes de
+                encaje son un detalle que marca la diferencia.
+              </p>
+            </div>
+            <div class="mb-3 pb-3 review-block">
+              <div class="d-flex justify-content-between">
+                <strong>Andrés P.</strong>
+                <span>★★★★☆</span>
+              </div>
+              <small class="text-muted">8 oct 2025</small>
+              <p class="mt-1 mb-0">
+                Lo compré para mi pareja, le encantó. El sombrero es muy bonito
+                aunque un poco grande. Buena relación calidad-precio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer-custom">
+      <div class="container-fluid">
+        <p>Skeleton Shop © 2026</p>
+        <a href="../index.html">Inicio</a>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

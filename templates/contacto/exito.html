@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mensaje enviado - Skeleton Shop{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center py-5 h-100">
+    <div class="contact-message-card text-warning w-100">
+        <div class="card-body text-center">
+            <h1 class="card-title mb-3">Mensaje enviado</h1>
+            <p class="card-text mb-4 text-light">Gracias por escribirnos. Tu mensaje ha sido enviado correctamente.</p>
+            <p class="small text-secondary">Serás redirigido a la página de inicio en unos segundos.</p>
+            <a id="volverInicio" href="/" class="btn btn-warning btn-lg mt-3">Volver al inicio ahora</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    setTimeout(function () {
+        window.location.href = "/";
+    }, 4000);
+</script>
+{% endblock %}

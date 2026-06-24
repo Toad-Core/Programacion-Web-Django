@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contacto - Skeleton Shop{% endblock %}
+
+{% block extra_head %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+    <script src="{% static 'js/formulario.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper bg-dark rounded-4 shadow-sm mt-4 contact-page">
+    <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+            <div class="contact-card p-4 h-100">
+                <span class="eyebrow d-inline-block mb-3">¿Listo para tu próximo disfraz?</span>
+                <h1 class="h3 text-warning mb-3">Hablemos de tu idea</h1>
+                <p class="text-light">Completa el formulario y uno de nuestros asesores te ayudará a elegir el disfraz perfecto con talla, color y accesorios.</p>
+                <div class="mt-4">
+                    <div class="mb-4 pb-3 border-bottom border-secondary opacity-50">
+                        <h5 class="text-warning mb-2">Somos tu mejor opción</h5>
+                        <p class="text-secondary mb-1">Atención rápida y asesoría personalizada para cada ocasión.</p>
+                    </div>
+                    <div>
+                        <p class="text-light mb-1"><strong>Email:</strong> contacto@skeletonshop.com</p>
+                        <p class="text-light mb-0"><strong>Teléfono:</strong> +56 9 1234 5678</p>
+                    </div>
+                </div>
+                <div class="d-grid gap-3 mt-auto">
+                    <a class="btn btn-outline-warning btn-lg" href="/catalogo/">Ver catálogo</a>
+                    <a class="btn btn-warning btn-lg" href="/">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="contact-card p-4 h-100">
+                <div class="d-flex align-items-center justify-content-between mb-4 gap-3">
+                    <div>
+                        <span class="eyebrow d-inline-block mb-2">Formulario</span>
+                        <h2 class="h4 text-warning mb-0">Envía tu consulta</h2>
+                    </div>
+                    <span class="badge bg-warning text-dark py-2 px-3">Rápido</span>
+                </div>
+                <!-- Nota: Cambié action a la ruta de éxito que crearemos en Django -->
+                <form id="formulario_contacto" action="/contacto/exito/" method="get" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan Pérez">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="tucorreo@dominio.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tipoConsulta" class="form-label">Tipo de consulta</label>
+                        <select id="tipoConsulta" name="tipoConsulta" class="form-select">
+                            <option value="">Selecciona una opción</option>
+                            <option value="disfraz">Consulta por disfraz</option>
+                            <option value="stock">Disponibilidad</option>
+                            <option value="personalizacion">Personalización</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Describe brevemente lo que necesitas"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-warning btn-lg w-100">Enviar consulta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
