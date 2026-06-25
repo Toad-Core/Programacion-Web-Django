@@ -57,9 +57,18 @@
     </main>
 
     <footer class="footer-custom mt-auto">
-        <div class="container-fluid">
-            <p>Skeleton Shop © 2026</p>
-            <a href="/">Inicio</a>
+        <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <p class="mb-0">Skeleton Shop © 2026</p>
+            <div class="d-flex gap-3 align-items-center flex-wrap">
+                <a href="/">Inicio</a>
+                <a href="/catalogo/">Catálogo</a>
+                <a href="/contacto/">Contacto</a>
+                {% if request.user.is_staff %}
+                    <a href="/admin/" class="admin-link">⚙️ Administración</a>
+                {% else %}
+                    <a href="/admin/" class="admin-link admin-link-hidden">⚙️ Admin</a>
+                {% endif %}
+            </div>
         </div>
     </footer>
 

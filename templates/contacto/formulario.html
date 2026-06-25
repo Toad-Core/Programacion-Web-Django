@@ -5,12 +5,52 @@
 
 {% block extra_head %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
-    <script src="{% static 'js/formulario.js' %}"></script>
+    <style>
+        /* Toast de notificación */
+        #toast-notif {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+            min-width: 320px;
+            display: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            animation: slideIn 0.4s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(40px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        .toast-ok  { background: #1a3a1a; border: 1px solid #28a745; color: #5eff7a; }
+        .toast-err { background: #3a1a1a; border: 1px solid #dc3545; color: #ff6b6b; }
+        #toast-notif .toast-inner { padding: 1rem 1.4rem; display: flex; align-items: center; gap: 0.8rem; }
+        #toast-notif .toast-icon { font-size: 1.5rem; }
+        #toast-notif .toast-msg  { font-weight: 600; font-size: 0.95rem; }
+
+        /* Spinner en el botón */
+        .btn-spinner { display: none; width: 1rem; height: 1rem; border: 2px solid #1f1f1f; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Contador de caracteres */
+        .char-counter { font-size: 0.78rem; color: #888; text-align: right; margin-top: 2px; }
+        .char-counter.warn { color: #ffd480; }
+        .char-counter.over { color: #ff6b6b; }
+    </style>
 {% endblock %}
 
 {% block content %}
+<!-- Toast de notificación -->
+<div id="toast-notif" role="alert" aria-live="polite">
+    <div class="toast-inner">
+        <span class="toast-icon" id="toast-icon"></span>
+        <span class="toast-msg"  id="toast-msg"></span>
+    </div>
+</div>
+
 <div class="content-wrapper bg-dark rounded-4 shadow-sm mt-4 contact-page">
     <div class="row g-4 align-items-stretch">
+        <!-- Panel izquierdo informativo -->
         <div class="col-lg-5">
             <div class="contact-card p-4 h-100">
                 <span class="eyebrow d-inline-block mb-3">¿Listo para tu próximo disfraz?</span>
@@ -26,12 +66,14 @@
                         <p class="text-light mb-0"><strong>Teléfono:</strong> +56 9 1234 5678</p>
                     </div>
                 </div>
-                <div class="d-grid gap-3 mt-auto">
+                <div class="d-grid gap-3 mt-auto pt-4">
                     <a class="btn btn-outline-warning btn-lg" href="/catalogo/">Ver catálogo</a>
                     <a class="btn btn-warning btn-lg" href="/">Volver al inicio</a>
                 </div>
             </div>
         </div>
+
+        <!-- Formulario principal -->
         <div class="col-lg-7">
             <div class="contact-card p-4 h-100">
                 <div class="d-flex align-items-center justify-content-between mb-4 gap-3">
@@ -41,25 +83,30 @@
                     </div>
                     <span class="badge bg-warning text-dark py-2 px-3">Rápido</span>
                 </div>
-                <!-- Nota: Cambié action a la ruta de éxito que crearemos en Django -->
-                <form id="formulario_contacto" action="/contacto/exito/" method="get" class="row g-3">
+
+                <form id="formulario_contacto" method="post" novalidate class="row g-3">
+                    {% csrf_token %}
+
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan Pérez">
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                               placeholder="Juan Pérez" autocomplete="name">
                     </div>
                     <div class="col-md-6">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+                        <input type="tel" class="form-control" id="telefono" name="telefono"
+                               placeholder="+56912345678" autocomplete="tel">
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="tucorreo@dominio.com">
+                        <input type="email" class="form-control" id="email" name="email"
+                               placeholder="tucorreo@dominio.com" autocomplete="email">
                     </div>
                     <div class="col-md-6">
                         <label for="tipoConsulta" class="form-label">Tipo de consulta</label>
                         <select id="tipoConsulta" name="tipoConsulta" class="form-select">
                             <option value="">Selecciona una opción</option>
-                            <option value="disfraz">Consulta por disfraz</option>
+                            <option value="disfraz"{% if disfraz_param %} selected{% endif %}>Consulta por disfraz</option>
                             <option value="stock">Disponibilidad</option>
                             <option value="personalizacion">Personalización</option>
                             <option value="otro">Otro</option>
@@ -67,14 +114,24 @@
                     </div>
                     <div class="col-12">
                         <label for="mensaje" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Describe brevemente lo que necesitas"></textarea>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5"
+                                  placeholder="Describe brevemente lo que necesitas{% if disfraz_param %} (Disfraz: {{ disfraz_param }}){% endif %}"
+                                  maxlength="500"></textarea>
+                        <div class="char-counter" id="char-counter">0 / 500 caracteres</div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-warning btn-lg w-100">Enviar consulta</button>
+                        <button type="submit" id="btn-enviar" class="btn btn-warning btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
+                            <span id="btn-texto">Enviar consulta</span>
+                            <div class="btn-spinner" id="btn-spinner"></div>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/formulario.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ disfraz.nombre }} - Skeleton Shop{% endblock %}
+
+{% block extra_head %}
+<style>
+  .detalle-container {
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+  .detalle-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #ff7518;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .detalle-back:hover {
+    color: #ffa94d;
+  }
+  .detalle-card {
+    background: #1f1f1f;
+    border: 1px solid #ff751840;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .detalle-imagen {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(135deg, #2a2a2a, #3a2000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+  }
+  .detalle-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 360px;
+  }
+  .detalle-imagen .emoji-placeholder {
+    font-size: 8rem;
+    opacity: 0.5;
+  }
+  .detalle-info {
+    flex: 1;
+    padding: 2.5rem 2rem;
+    min-width: 260px;
+  }
+  .detalle-info h1 {
+    color: #ff7518;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 0 12px #ff751855;
+    margin-bottom: 1rem;
+  }
+  .detalle-precio {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffd480;
+    margin-bottom: 1.2rem;
+  }
+  .detalle-descripcion {
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+  .tallas-label {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .tallas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .talla-btn {
+    background: #2a2a2a;
+    color: #ff7518;
+    border: 2px solid #ff7518;
+    border-radius: 8px;
+    padding: 6px 18px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .talla-btn:hover, .talla-btn.selected {
+    background: #ff7518;
+    color: #1f1f1f;
+  }
+  .btn-contactar {
+    background: #ff7518;
+    color: #1f1f1f;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, box-shadow 0.2s;
+    width: 100%;
+    text-align: center;
+  }
+  .btn-contactar:hover {
+    background: #ffa94d;
+    color: #1f1f1f;
+    box-shadow: 0 0 20px #ff751860;
+  }
+
+  @media (max-width: 600px) {
+    .detalle-imagen { max-width: 100%; }
+    .detalle-info { padding: 1.5rem 1rem; }
+    .detalle-info h1 { font-size: 1.5rem; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="detalle-container">
+  <a href="{% url 'catalogo' %}" class="detalle-back">← Volver al catálogo</a>
+
+  <div class="detalle-card">
+    <div class="detalle-imagen">
+      {% if disfraz.imagen %}
+        <img src="{{ disfraz.imagen.url }}" alt="{{ disfraz.nombre }}">
+      {% else %}
+        <div class="emoji-placeholder">🎭</div>
+      {% endif %}
+    </div>
+
+    <div class="detalle-info">
+      <h1>{{ disfraz.nombre }}</h1>
+
+      <div class="detalle-precio">${{ disfraz.precio }}</div>
+
+      {% if disfraz.descripcion %}
+        <p class="detalle-descripcion">{{ disfraz.descripcion }}</p>
+      {% else %}
+        <p class="detalle-descripcion">Disfraz de alta calidad disponible en varias tallas.</p>
+      {% endif %}
+
+      {% if lista_tallas %}
+      <div class="tallas-label">Tallas disponibles</div>
+      <div class="tallas-grid">
+        {% for talla in lista_tallas %}
+          <button class="talla-btn" onclick="selectTalla(this)">{{ talla }}</button>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <a href="{% url 'contacto' %}?disfraz={{ disfraz.nombre }}" class="btn-contactar">
+        📞 Cotizar este disfraz
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function selectTalla(btn) {
+    document.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+</script>
+{% endblock %}
