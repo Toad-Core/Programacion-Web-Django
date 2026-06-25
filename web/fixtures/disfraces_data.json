@@ -1,0 +1,62 @@
+[
+  {
+    "model": "web.disfraz",
+    "pk": 1,
+    "fields": {
+      "nombre": "Vampiro Elegante",
+      "descripcion": "Disfraz de vampiro de alta calidad con capa de satén, chaleco bordado y cuello alto. Perfecto para Halloween, fiestas temáticas o eventos de cosplay. Incluye capa, chaleco, camisa y medallón decorativo.",
+      "categoria": "Vampiro",
+      "tallas": "S, M, L, XL",
+      "stock": 15,
+      "comprados": 42,
+      "precio": 49990,
+      "precio_anterior": 64990,
+      "imagen": "disfraces/disfraz1-1.png"
+    }
+  },
+  {
+    "model": "web.disfraz",
+    "pk": 2,
+    "fields": {
+      "nombre": "Bruja Mística",
+      "descripcion": "Disfraz de bruja con vestido largo de tul negro y morado, sombrero de punta con hebilla decorativa y cinturón con detalles plateados. Ideal para Halloween y sesiones temáticas.",
+      "categoria": "Bruja",
+      "tallas": "S, M, L",
+      "stock": 8,
+      "comprados": 120,
+      "precio": 42990,
+      "precio_anterior": 55990,
+      "imagen": "disfraces/disfraz2-1.png"
+    }
+  },
+  {
+    "model": "web.disfraz",
+    "pk": 3,
+    "fields": {
+      "nombre": "Asesino de las Sombras",
+      "descripcion": "Traje táctico oscuro con capucha, máscara de tela transpirable, cinturón con fundas multipropósito y detalles en cuero sintético. Ideal para cosplay de acción.",
+      "categoria": "Asesino",
+      "tallas": "M, L, XL",
+      "stock": 0,
+      "comprados": 85,
+      "precio": 35000,
+      "precio_anterior": 45000,
+      "imagen": "disfraces/disfraz1-2.png"
+    }
+  },
+  {
+    "model": "web.disfraz",
+    "pk": 4,
+    "fields": {
+      "nombre": "Hombre Lobo Salvaje",
+      "descripcion": "Camisa a cuadros rasgada con pelaje sintético adherido al pecho y brazos, máscara de látex realista y guantes con garras detalladas.",
+      "categoria": "Monstruo",
+      "tallas": "L, XL",
+      "stock": 5,
+      "comprados": 15,
+      "precio": 55000,
+      "precio_anterior": null,
+      "imagen": "disfraces/disfraz2-2.png"
+    }
+  }
+]

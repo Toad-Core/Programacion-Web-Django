@@ -1,15 +1,18 @@
 from django.db import models
 
 class Disfraz(models.Model):
-    nombre = models.CharField(max_length=200)
-    descripcion = models.TextField(blank=True)
-    precio = models.DecimalField(max_digits=8, decimal_places=2, default=0)
-    tallas = models.CharField(max_length=200, default='S, M, L, XL')
-    imagen = models.ImageField(upload_to='disfraces/', blank=True, null=True)
-
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    categoria = models.CharField(max_length=50)
+    tallas = models.CharField(max_length=100, help_text="Ej: S, M, L, XL") 
+    stock = models.IntegerField(default=0)
+    comprados = models.IntegerField(default=0)
+    precio = models.IntegerField()
+    precio_anterior = models.IntegerField(null=True, blank=True)
+    imagen = models.ImageField(upload_to='disfraces/', null=True, blank=True)
+    
     def __str__(self):
         return self.nombre
-
 
 TIPO_CONSULTA_OPCIONES = [
     ('disfraz', 'Consulta por disfraz'),

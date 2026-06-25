@@ -47,19 +47,31 @@ def contacto_exito(request):
     return render(request, 'contacto/exito.html')
 
 def catalogo(request):
-    disfraces_qs = Disfraz.objects.all()
-    disfraces = []
-    for d in disfraces_qs:
-        disfraces.append({
-            'obj': d,
-            'lista_tallas': [t.strip() for t in d.tallas.split(',')],
-        })
-    return render(request, 'catalogo/catalogo.html', {'disfraces': disfraces})
+    # Obtenemos el parámetro de orden desde la URL
+    orden = request.GET.get('orden', '')
+
+    # Obtenemos todos los disfraces
+    disfraces = Disfraz.objects.all()
+
+    # Aplicamos el ordenamiento según la selección
+    if orden == 'precio_asc':
+        disfraces = disfraces.order_by('precio')  # De menor a mayor
+    elif orden == 'precio_desc':
+        disfraces = disfraces.order_by('-precio') # De mayor a menor
+    elif orden == 'vendidos':
+        disfraces = disfraces.order_by('-comprados') # Los más vendidos primero
+    
+    context = {
+        'disfraces': disfraces,
+        'orden_actual': orden 
+    }
+    return render(request, 'catalogo/catalogo.html', context)
 
 def detalle(request, disfraz_id):
     disfraz = get_object_or_404(Disfraz, id=disfraz_id)
     lista_tallas = [talla.strip() for talla in disfraz.tallas.split(',')]
+
     return render(request, 'catalogo/detalle.html', {
         'disfraz': disfraz,
         'lista_tallas': lista_tallas
-    })
+    })
