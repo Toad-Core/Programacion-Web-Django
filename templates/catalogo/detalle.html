@@ -3,58 +3,193 @@
 
 {% block title %}{{ disfraz.nombre }} - Skeleton Shop{% endblock %}
 
-{% block extra_head %}
-<style>
-  
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="detalle-container">
-  <a href="{% url 'catalogo' %}" class="detalle-back">← Volver al catálogo</a>
-
-  <div class="detalle-card">
-    <div class="detalle-imagen">
-      {% if disfraz.imagen %}
-        <img src="{{ disfraz.imagen.url }}" alt="{{ disfraz.nombre }}">
-      {% else %}
-        <div class="emoji-placeholder">🎭</div>
-      {% endif %}
+<div class="content-wrapper product-page mt-4">
+    <div class="product-breadcrumb mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <a href="{% url 'catalogo' %}" class="btn btn-sm btn-outline-warning">← Volver a disfraces</a>
+        <div class="text-end">
+            <p class="small text-muted mb-1">Categoría: <span class="text-warning fw-bold">{{ disfraz.categoria }}</span></p>
+            <p class="small text-muted mb-0">
+                Stock: 
+                {% if disfraz.stock > 0 %}
+                    <span class="text-warning">Disponible ({{ disfraz.stock }})</span>
+                {% else %}
+                    <span style="color: #ff4d4d; font-weight: 600;">Agotado</span>
+                {% endif %}
+            </p>
+        </div>
     </div>
 
-    <div class="detalle-info">
-      <h1>{{ disfraz.nombre }}</h1>
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-6 product-carousel">
+            <div id="carouselProducto" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        {% if disfraz.imagen %}
+                            <img src="{{ disfraz.imagen.url }}" class="d-block w-100 product-image" alt="{{ disfraz.nombre }} - Vista frontal" />
+                        {% else %}
+                            <div class="d-flex align-items-center justify-content-center bg-dark" style="height: 470px;">
+                                <span style="font-size: 5rem; opacity: 0.5;">🎭</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <div class="detalle-precio">${{ disfraz.precio }}</div>
+        <div class="col-lg-6 product-info">
+            <h1 class="product-title mb-2">{{ disfraz.nombre }}</h1>
+            <div class="product-meta d-flex align-items-center gap-2 mb-3">
+                {% if disfraz.precio_anterior %}
+                    <span class="badge rounded-pill bg-warning text-dark">Oferta</span>
+                {% endif %}
+                <span class="text-warning">★★★★☆</span>
+                <small class="text-secondary">({{ disfraz.comprados }} vendidos)</small>
+            </div>
+            
+            <p class="small text-secondary mb-3">
+                Entrega express 24-48 horas · Envío gratis sobre $30.000
+            </p>
 
-      {% if disfraz.descripcion %}
-        <p class="detalle-descripcion">{{ disfraz.descripcion }}</p>
-      {% else %}
-        <p class="detalle-descripcion">Disfraz de alta calidad disponible en varias tallas.</p>
-      {% endif %}
+            <p class="product-price mb-1">${{ disfraz.precio }}</p>
+            {% if disfraz.precio_anterior %}
+                <p class="precio-og mb-3">${{ disfraz.precio_anterior }}</p>
+            {% else %}
+                <p class="mb-3"><br></p> {% endif %}
 
-      {% if lista_tallas %}
-      <div class="tallas-label">Tallas disponibles</div>
-      <div class="tallas-grid">
-        {% for talla in lista_tallas %}
-          <button class="talla-btn" onclick="selectTalla(this)">{{ talla }}</button>
-        {% endfor %}
-      </div>
-      {% endif %}
+            <p class="product-description">
+                {{ disfraz.descripcion }}
+            </p>
 
-      <a href="{% url 'contacto' %}?disfraz={{ disfraz.nombre }}" class="btn-contactar">
-        📞 Cotizar este disfraz
-      </a>
+            <hr class="section-divider" />
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-warning" for="talla">Talla</label>
+                <select id="talla" class="form-select w-auto bg-dark text-light border-warning" name="talla" {% if disfraz.stock == 0 %}disabled{% endif %}>
+                    {% for talla in lista_tallas %}
+                        <option value="{{ talla }}">{{ talla }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-warning">Cantidad</label>
+                <div class="input-group input-quantity" style="max-width: 150px">
+                    <button class="btn btn-outline-warning" type="button" {% if disfraz.stock == 0 %}disabled{% endif %}>−</button>
+                    <input type="number" class="form-control text-center text-light bg-dark border-warning" value="1" min="1" max="{{ disfraz.stock }}" {% if disfraz.stock == 0 %}disabled{% endif %} />
+                    <button class="btn btn-outline-warning" type="button" {% if disfraz.stock == 0 %}disabled{% endif %}>+</button>
+                </div>
+            </div>
+
+            <div class="product-actions d-flex gap-3 flex-wrap">
+                <button class="btn btn-lg fw-bold btn-warning action-button" {% if disfraz.stock == 0 %}disabled{% endif %}>
+                    {% if disfraz.stock > 0 %}🛒 Agregar al carrito{% else %}Sin Stock{% endif %}
+                </button>
+                <button class="btn btn-outline-warning btn-lg">♡ Favoritos</button>
+            </div>
+
+            <hr class="section-divider mt-4" />
+
+            <ul class="list-unstyled product-features">
+                <li>✔ Envío gratis en compras sobre $30.000</li>
+                <li>✔ Devolución gratuita en 30 días</li>
+                <li>✔ Calidad garantizada Skeleton Shop</li>
+                <li>✔ Disponible para envío inmediato</li>
+            </ul>
+        </div>
     </div>
-  </div>
+
+    <div class="product-tabs mt-5">
+        <ul class="nav nav-tabs" id="productoTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab">
+                    Descripción
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="resenas-tab" data-bs-toggle="tab" data-bs-target="#resenas" type="button" role="tab">
+                    Reseñas
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content p-4">
+            <div class="tab-pane fade show active" id="desc" role="tabpanel">
+                <h5>Detalles del disfraz</h5>
+                <p>{{ disfraz.descripcion }}</p>
+                <p class="text-secondary mt-3"><em>Nota: Los accesorios adicionales mostrados en las imágenes pueden venderse por separado dependiendo del modelo.</em></p>
+            </div>
+            
+            <div class="tab-pane fade" id="resenas" role="tabpanel">
+                <div class="mb-3 pb-3 review-block">
+                    <div class="d-flex justify-content-between">
+                        <strong>María G.</strong>
+                        <span class="text-warning">★★★★★</span>
+                    </div>
+                    <small class="text-muted">Hace 1 semana</small>
+                    <p class="mt-1 mb-0 text-light">
+                        Excelente calidad, se ve increíble en persona. Totalmente recomendado.
+                    </p>
+                </div>
+                <div class="mb-3 pb-3 review-block">
+                    <div class="d-flex justify-content-between">
+                        <strong>Carlos R.</strong>
+                        <span class="text-warning">★★★★☆</span>
+                    </div>
+                    <small class="text-muted">Hace 1 mes</small>
+                    <p class="mt-1 mb-0 text-light">
+                        Muy buen disfraz, llegó súper rápido.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-  function selectTalla(btn) {
-    document.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Buscamos los elementos dentro de la caja de cantidad
+        const container = document.querySelector('.input-quantity');
+        
+        if (container) {
+            const btnMinus = container.querySelector('button:first-child');
+            const btnPlus = container.querySelector('button:last-child');
+            const inputNum = container.querySelector('input[type="number"]');
+
+            // Función para el botón de resta (-)
+            btnMinus.addEventListener('click', function() {
+                let valorActual = parseInt(inputNum.value) || 1;
+                let min = parseInt(inputNum.getAttribute('min')) || 1;
+                
+                if (valorActual > min) {
+                    inputNum.value = valorActual - 1;
+                }
+            });
+
+            // Función para el botón de suma (+)
+            btnPlus.addEventListener('click', function() {
+                let valorActual = parseInt(inputNum.value) || 1;
+                let max = parseInt(inputNum.getAttribute('max')) || 999;
+                
+                if (valorActual < max) {
+                    inputNum.value = valorActual + 1;
+                }
+            });
+            
+            // Evitar que el usuario escriba a mano un número mayor al stock
+            inputNum.addEventListener('change', function() {
+                let valorActual = parseInt(this.value) || 1;
+                let min = parseInt(this.getAttribute('min')) || 1;
+                let max = parseInt(this.getAttribute('max')) || 999;
+                
+                if (valorActual > max) {
+                    this.value = max;
+                } else if (valorActual < min) {
+                    this.value = min;
+                }
+            });
+        }
+    });
 </script>
 {% endblock %}

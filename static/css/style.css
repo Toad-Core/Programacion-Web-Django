@@ -1,6 +1,6 @@
-/* ==========================================================================
-   1. BASE Y RESET
-   ========================================================================== */
+/*
+  BASE Y RESET
+  */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -25,9 +25,10 @@ main {
   max-width: 800px;
 }
 
-/* ==========================================================================
-   2. COMPONENTES GLOBALES (Botones, Navbar, Footer)
-   ========================================================================== */
+/*
+  COMPONENTES GLOBALES
+*/
+
 /* Botones Base */
 .btn {
   background-color: #ff7518;
@@ -165,9 +166,9 @@ main {
   box-shadow: none;
 }
 
-/* ==========================================================================
-   3. ESTRUCTURA Y CONTENEDORES (Wrappers, Cards base)
-   ========================================================================== */
+/*
+  ESTRUCTURA Y CONTENEDORES (Wrappers, Cards base)
+*/
 .content-wrapper {
   width: 100%;
   max-width: 1200px;
@@ -241,9 +242,9 @@ main {
   text-shadow: none;
 }
 
-/* ==========================================================================
-   4. PÁGINA DE INICIO (Carrusel y Hero)
-   ========================================================================== */
+/*
+  PÁGINA DE INICIO
+  */
 .home-hero {
   padding: 2rem 1.5rem 1.5rem;
   background: radial-gradient(circle at top, rgba(255, 117, 24, 0.12), transparent 60%);
@@ -337,9 +338,9 @@ main {
   color: #e8d3a8;
 }
 
-/* ==========================================================================
-   5. PÁGINA DE CATÁLOGO
-   ========================================================================== */
+/*
+  PÁGINA DE CATÁLOGO
+*/
 .catalogo-hero {
   background: linear-gradient(135deg, #1f1f1f 0%, #2d1a00 100%);
   padding: 3rem 1rem 2rem;
@@ -462,9 +463,9 @@ main {
   font-weight: 600;
 }
 
-/* ==========================================================================
-   6. PÁGINA DE DETALLE (Producto individual)
-   ========================================================================== */
+/*
+  PÁGINA DE DETALLE
+*/
 .detalle-container {
   max-width: 960px;
   margin: 3rem auto;
@@ -583,9 +584,9 @@ main {
   box-shadow: 0 0 20px #ff751860;
 }
 
-/* ==========================================================================
-   7. PÁGINA DE CONTACTO
-   ========================================================================== */
+/*
+  PÁGINA DE CONTACTO
+*/
 .contact-card {
   background: rgba(25, 25, 25, 0.95);
   border: 1px solid rgba(255, 117, 24, 0.25);
@@ -635,9 +636,9 @@ main {
   padding: 2rem;
 }
 
-/* ==========================================================================
-   8. MEDIA QUERIES (Adaptación a pantallas pequeñas)
-   ========================================================================== */
+/* 
+  MEDIA QUERIES 
+*/
 @media (max-width: 992px) {
   .product-breadcrumb,
   .product-info,
@@ -678,4 +679,47 @@ main {
   .content-wrapper {
     padding: 1rem;
   }
+}
+
+.nav-tabs .nav-link.active,
+.product-tabs .nav-link.active {
+  background-color: #ff7518 !important;
+  color: #1f1f1f !important;
+  border-color: #ff7518 !important;
+}
+.nav-tabs .nav-link {
+  color: #ffb366 !important;
+}
+.nav-tabs .nav-link:hover {
+  color: #ffd480 !important;
+  border-color: rgba(255, 117, 24, 0.5) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+  border-color: #ffb86c !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 117, 24, 0.25) !important;
+  background-color: #1f1f1f !important;
+  color: #fff !important;
+}
+
+.form-select option {
+  background-color: #1f1f1f;
+  color: #ffb366;
+}
+
+.input-quantity input[type="number"]::-webkit-inner-spin-button,
+.input-quantity input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-quantity input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+::selection {
+  background-color: rgba(255, 117, 24, 0.4);
+  color: #ffffff;
 }
