@@ -55,7 +55,7 @@ main {
 
 /* Navbar */
 .navbar-custom {
-  background-color: #1f1f1f;
+  background-color: #1f1f1f !important;
   font-weight: bold;
 }
 .navbar-custom .navbar-brand,
@@ -107,7 +107,7 @@ main {
 
 /* Footer */
 .footer-custom {
-  background-color: #1f1f1f;
+  background-color: #1f1f1f !important;
   color: #ff7518;
   padding: 20px 0;
   text-align: center;
